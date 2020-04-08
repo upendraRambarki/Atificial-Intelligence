@@ -1,0 +1,102 @@
+import pandas as pd
+import openpyxl
+import datetime
+import matplotlib.pyplot as plt
+
+
+path = "C:\\Users\Vicky\Desktop\data.xlsx"
+wb = openpyxl.load_workbook(path)
+ws = wb["Sheet"]
+sheet1 = wb.active
+
+print("The date you entered should be in range and format that i have specified else you willnot find the temperature for next 7 days \n")
+name = input("Enter the name of the city : ")
+print("The range of the year should be from 2016 to 2018 ")
+
+date_entry = input('Enter a date (i.e. yyyy,mm,dd) : ')
+year, month, day = map(int, date_entry.split(','))
+
+ds = datetime.datetime(year, month, day ).strftime('%Y-%m-%d %H:%M:%S')
+print("The date you entered is : " +ds)
+
+
+for cell in ws["A"]:
+    for j in range(1,sheet1.max_column):
+        for i in range(1,sheet1.max_row):
+            cell_0 = sheet1.cell(row=i,column=j)
+            if str(ds) in str(cell_0.value):
+                print("\nThe temperature in Degree Celcius for next 7 days with specified date are : \n" )
+
+                cell_1 = sheet1.cell(row=i,column=j)
+                a = cell_1.value
+                print(">>>>>>>First day : ")
+                print(a)
+                cell_2 = sheet1.cell(row=i,column=j+1)
+                b = cell_2.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(b)
+                
+                cell_3 = sheet1.cell(row=i+1,column=j)
+                c = cell_3.value
+                print("\n>>>>>>>Second day : ")
+                print(c)
+                cell_4 = sheet1.cell(row=i+1,column=j+1)
+                d = cell_4.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(d)
+                
+                cell_5 = sheet1.cell(row=i+2,column=j)
+                e = cell_5.value
+                print("\n>>>>>>>Third day : ")
+                print(e)
+                cell_6 = sheet1.cell(row=i+2,column=j+1)
+                f = cell_6.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(f)
+                
+                cell_7 = sheet1.cell(row=i+3,column=j)
+                g = cell_7.value
+                print("\n>>>>>>>Fourth day : ")
+                print(g)
+                cell_8 = sheet1.cell(row=i+3,column=j+1)
+                h = cell_8.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(h)
+                
+                cell_9 = sheet1.cell(row=i+4,column=j)
+                k = cell_9.value
+                print("\n>>>>>>>Fifth day : ")
+                print(k)
+                cell_A = sheet1.cell(row=i+4,column=j+1)
+                l = cell_A.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(l)
+                
+                cell_10 = sheet1.cell(row=i+5,column=j)
+                m= cell_10.value
+                print("\n>>>>>>>Fifth day : ")
+                print(m)
+                cell_11 = sheet1.cell(row=i+5,column=j+1)
+                n = cell_11.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(n)
+                
+                cell_12 = sheet1.cell(row=i+6,column=j)
+                o = cell_12.value
+                print("\n>>>>>>>Seventh day : ")
+                print(o)
+                cell_13 = sheet1.cell(row=i+6,column=j+1)
+                p = cell_13.value
+                print("It's temperature in Degree_Celsius is : ")
+                print(p)
+                
+                
+                x = [0.25,1.25,2.25,3.25,4.25,5.25,6.25]
+                y = [b,d,f,h,l,n,p]
+                plt.plot(x,y)
+                plt.xlabel('Day')
+                plt.ylabel('Temperature(in degree_celcius)')
+                plt.title('Temperature graph for one week ')
+                plt.show() 
+                   
+    break
